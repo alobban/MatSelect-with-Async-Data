@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   title = 'Testing Material Select with Async Data';
 
   persons: Sample[];
+  morePersons: Sample[];
   addressBook: FormGroup;
 
   constructor(public usersService: UsersService, private fb: FormBuilder) {
@@ -23,14 +24,22 @@ export class AppComponent implements OnInit {
     this.usersService.getPersons().subscribe(
       users => {
         this.persons = users;
-        console.log(this.persons);
+        // console.log(this.persons);
       }
     );
+
+    this.usersService.getMorePeople().subscribe(
+      users => {
+        this.morePersons = users;
+        console.log(this.morePersons);
+      }
+    )
   }
 
   generateForm() {
     this.addressBook = this.fb.group({
-      contact: ''
+      contact: '',
+      additional: ''
     });
   }
 
